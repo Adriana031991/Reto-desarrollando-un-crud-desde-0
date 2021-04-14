@@ -4,28 +4,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
 
-public class PlayerDto {
+public class PlayerDto  {
 
-    private int idPlayerDto;
-    private String namePlayerDto;
+    private int idDto;
+    private String nameDto;
 
     public PlayerDto() {
     }
 
-    public int getIdPlayerDto() {
-        return idPlayerDto;
+
+    public int getIdDto() {
+        return idDto;
     }
 
-    public void setIdPlayerDto(int idPlayerDto) {
-        this.idPlayerDto = idPlayerDto;
+    public void setIdDto(int idDto) {
+        this.idDto = idDto;
     }
 
-    public String getNamePlayerDto() {
-        return namePlayerDto;
+    public String getNameDto() {
+        return nameDto;
     }
 
-    public void setNamePlayerDto(String namePlayerDto) {
-        this.namePlayerDto = namePlayerDto;
+    public void setNameDto(String nameDto) {
+        this.nameDto = nameDto;
     }
 }

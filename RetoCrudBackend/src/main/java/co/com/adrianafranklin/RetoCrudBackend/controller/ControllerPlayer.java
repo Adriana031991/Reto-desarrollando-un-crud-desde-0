@@ -4,6 +4,7 @@ import co.com.adrianafranklin.RetoCrudBackend.DTO.PlayerDto;
 import co.com.adrianafranklin.RetoCrudBackend.DTO.ResponseDto;
 import co.com.adrianafranklin.RetoCrudBackend.Service.ServicePlayer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
