@@ -12,24 +12,43 @@ import org.springframework.stereotype.Service;
 public class ServicePlayer {
     @Autowired
     private RepositoryPlayer repositoryPlayer;
+    @Autowired
+    private ServiceCar serviceCar;
 
     public ResponseDto Player() {
         return new ResponseDto(repositoryPlayer.findAll());
     }
 
     public ResponseDto savePlayer(PlayerDto playerDto) {
+
+        if(playerDto.getNameDto()== null ||playerDto.getNameDto().isBlank() )
+            throw new ValidationException("El nombre del jugador no puede ser vacío");
+
         //trae los datos del dto y los guarda en list
         Player player = new Player();
-            player.setId(playerDto.getIdDto());
-            player.setName(playerDto.getNameDto());
-            player = repositoryPlayer.save(player);
-            return new ResponseDto(player, "Se ha creado el jugador correctamente");
+        player.setId(playerDto.getIdDto());
+        player.setName(playerDto.getNameDto());
+        player = repositoryPlayer.save(player);
+        return this.assignCar(player);
 
     }
+    public ResponseDto assignCar(Player player){
+        return serviceCar.assignDriver(player);
+    }
 
+    public ResponseDto updatePlayer(PlayerDto playerDto){
+        if (playerDto.getNameDto()==null || playerDto.getNameDto().isBlank())
+            throw new ValidationException("Debe especificar el numero del jugador a actualizar");
+
+        Player player = new Player();
+        player.setId(playerDto.getIdDto());
+        player.setName(playerDto.getNameDto());
+        repositoryPlayer.save(player);
+        return new ResponseDto(player,"El jugador ha sido actualizado");
+    }
 
     public ResponseDto deleteById(int id) {
-        repositoryPlayer.deleteById( id);
+        repositoryPlayer.deleteById(id);
         return new ResponseDto("jugador eliminado correctamente");
 
     }

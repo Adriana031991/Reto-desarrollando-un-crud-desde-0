@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin( "http://localhost:3000" )
 @RequestMapping("api/player")
 public class ControllerPlayer {
 
@@ -24,19 +25,20 @@ public class ControllerPlayer {
         return servicePlayer.savePlayer(playerDto);
     }
 
+
     @PutMapping
-    public ResponseDto updateTodo(@RequestBody PlayerDto playerDto){
+    public ResponseDto updatePlayer(@RequestBody PlayerDto playerDto) {
         return servicePlayer.savePlayer(playerDto);
     }
 
 
     @DeleteMapping(value = "{id}")
-    public ResponseDto delete(@PathVariable("id")int id){
+    public ResponseDto delete(@PathVariable("id") int id) {
         return servicePlayer.deleteById(id);
     }
 
     @GetMapping(value = "{id}")
-    public ResponseDto get(@PathVariable("id") int id){
+    public ResponseDto get(@PathVariable("id") int id) {
         return servicePlayer.get(id);
     }
 }

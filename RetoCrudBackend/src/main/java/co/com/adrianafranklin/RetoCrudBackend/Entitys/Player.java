@@ -12,7 +12,7 @@ public class Player  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @JoinColumn(name = "pla_name")
+    @Column(nullable = false, length = 50)
     private String name;
 
     public Player() {
@@ -37,5 +37,13 @@ public class Player  {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

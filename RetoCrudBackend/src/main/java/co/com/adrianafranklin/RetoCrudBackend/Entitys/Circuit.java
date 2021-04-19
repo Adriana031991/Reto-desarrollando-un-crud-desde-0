@@ -1,23 +1,25 @@
 package co.com.adrianafranklin.RetoCrudBackend.Entitys;
 
 import javax.persistence.*;
+import java.util.Set;
 
-@Table(name = "Game")
+@Table(name = "Ciruit")
 @Entity
-public class Game {
+public class Circuit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
 
-    /*hacer la relación como con los player*/
-    @OneToOne()
+    @OneToMany()
+    @OrderBy(value = "id")
     @JoinColumn(name = "circuit_id")
-    private Circuit circuit;
+    private Set<Lane> lanes;
 
-    public Game() {
+    private int kilometers;
 
+    public Circuit() {
     }
 
     public int getId() {
@@ -36,12 +38,19 @@ public class Game {
         this.name = name;
     }
 
-    public Circuit getCircuit() {
-        return circuit;
+    public int getKilometers() {
+        return kilometers;
     }
 
-    public void setCircuit(Circuit circuit) {
-        this.circuit = circuit;
+    public void setKilometers(int kilometers) {
+        this.kilometers = kilometers;
     }
 
+    public Set<Lane> getLanes() {
+        return lanes;
+    }
+
+    public void setLanes(Set<Lane> lanes) {
+        this.lanes = lanes;
+    }
 }

@@ -7,22 +7,30 @@ import javax.persistence.*;
 public class Lane {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int numLane;
+    private int idLane;
 
-    @OneToOne()
-    @JoinColumn(name = "car_id")
+    private String name;
+
+    @Transient
     private Car car;
-
 
     public Lane() {
     }
 
-    public int getNumLane() {
-        return numLane;
+    public String getName() {
+        return name;
     }
 
-    public void setNumLane(int numLane) {
-        this.numLane = numLane;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getIdLane() {
+        return idLane;
+    }
+
+    public void setIdLane(int idLane) {
+        this.idLane = idLane;
     }
 
     public Car getCar() {
@@ -32,6 +40,4 @@ public class Lane {
     public void setCar(Car car) {
         this.car = car;
     }
-
-
 }

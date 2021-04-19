@@ -14,10 +14,13 @@ public class Car {
     private String nameCar;
 
     @OneToOne()
+    @JoinColumn(name = "player_id")
     private Player driver;
 
+    @Transient
     private int routeMts;
 
+    @Transient
     private boolean winner;
 
     public Car() {
@@ -73,7 +76,6 @@ public class Car {
     public void setWinner(boolean winner) {
         this.winner = winner;
     }
-
 
     public void advance(){
         if (this.driver == null){
