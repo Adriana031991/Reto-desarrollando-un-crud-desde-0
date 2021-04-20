@@ -83,7 +83,7 @@ public class Car {
         }
 
         Random random = new Random();
-        int mtsCarAdvance = ((random.nextInt(+ - 1)+1)*100);
+        int mtsCarAdvance = ((random.nextInt(6 - 1)+1)*100);
         this.routeMts = this.routeMts + mtsCarAdvance;
     }
 

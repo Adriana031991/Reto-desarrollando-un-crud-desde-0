@@ -11,7 +11,6 @@ public class Game {
 
     private String name;
 
-    /*hacer la relación como con los player*/
     @OneToOne()
     @JoinColumn(name = "circuit_id")
     private Circuit circuit;

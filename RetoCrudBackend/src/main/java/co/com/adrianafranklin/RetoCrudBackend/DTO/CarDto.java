@@ -4,9 +4,9 @@ import co.com.adrianafranklin.RetoCrudBackend.Entitys.Player;
 
 public class CarDto {
 
-    private int idDto;
-    private String nameDto;
-    private Player driverDto;
+    private int id;
+    private String name;
+    private Player driver;
     private int routeMts;
     private boolean winner;
     private int lane;
@@ -22,29 +22,28 @@ public class CarDto {
     public CarDto() {
     }
 
-
-    public int getIdDto() {
-        return idDto;
+    public int getId() {
+        return id;
     }
 
-    public void setIdDto(int idDto) {
-        this.idDto = idDto;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getNameDto() {
-        return nameDto;
+    public String getName() {
+        return name;
     }
 
-    public void setNameDto(String nameDto) {
-        this.nameDto = nameDto;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Player getDriverDto() {
-        return driverDto;
+    public Player getDriver() {
+        return driver;
     }
 
-    public void setDriverDto(Player driverDto) {
-        this.driverDto = driverDto;
+    public void setDriver(Player driver) {
+        this.driver = driver;
     }
 
     public int getRouteMts() {

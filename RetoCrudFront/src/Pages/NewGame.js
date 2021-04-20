@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 import carrera from '../images/carrera.gif'
 
 class NewGame extends Component {
@@ -9,11 +10,11 @@ class NewGame extends Component {
             <div className="container">
                 <h1>Iniciar Partida</h1>
                 <br></br>
-                <button>Inicia la carrera</button>
-                <br></br>
-        
+
                 <img src={carrera} height="300px" alt="Carrera" />
             <br></br>
+                    <Link to="/Podium"><button>Ir a Podio</button></Link>
+
             </div>
         </React.Fragment>
         );

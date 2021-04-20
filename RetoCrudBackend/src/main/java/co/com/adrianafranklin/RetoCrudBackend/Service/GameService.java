@@ -6,12 +6,11 @@ import co.com.adrianafranklin.RetoCrudBackend.DTO.CircuitCarDto;
 import co.com.adrianafranklin.RetoCrudBackend.DTO.ResponseDto;
 import co.com.adrianafranklin.RetoCrudBackend.Entitys.*;
 import co.com.adrianafranklin.RetoCrudBackend.Repository.GameRepository;
+import co.com.adrianafranklin.RetoCrudBackend.exception.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class GameService {
@@ -36,27 +35,48 @@ public class GameService {
         Game game = new Game();
 
 
-        Circuit circuit = (Circuit) circuitService.get(circuitCarDto.getCircuit().getIdDto()).getData();
+        Circuit circuit = (Circuit) circuitService.get(circuitCarDto.getCircuit().getId()).getData();
+
+        if(circuitCarDto.getCars().size()<3){
+            throw new ValidationException("Deben haber mínimo 3 conductores para jugar");
+        }
+        if(circuitCarDto.getCars().size()>circuit.getLanes().size()){
+            throw new ValidationException("Deben haber mínimo 3 conductores o "+circuit.getLanes().size());
+        }
+
+
         game.setCircuit(circuit);
 
         List<LaneCar> lanesCars = new ArrayList<>();
+
+        Set<Lane> newLanes = new HashSet<>();
+
+        Iterator<Lane> laneIterator = circuit.getLanes().iterator();
+
         for (int i = 0; i < circuit.getLanes().size(); i++) {
 
-            LaneCar laneCar = new LaneCar();
+            if(i>=circuitCarDto.getCars().size()) {
+                break;
+            }
+                LaneCar laneCar = new LaneCar();
 
-            Lane lane = circuit.getLanes().iterator().next();
-            laneCar.setLane(lane);
+                Lane lane = laneIterator.next();
+                laneCar.setLane(lane);
 
-            CarDto carDto = circuitCarDto.getCars().get(i);
 
-            Car car = (Car) serviceCar.get(carDto.getIdDto()).getData();
+                CarDto carDto = circuitCarDto.getCars().get(i);
 
-            lane.setCar(car);
-            laneCar.setCar(car);
+                Car car = (Car) serviceCar.get(carDto.getId()).getData();
 
-            lanesCars.add(laneCar);
+                lane.setCar(car);
+                laneCar.setCar(car);
+
+                lanesCars.add(laneCar);
+                newLanes.add(lane);
+
 
         }
+        circuit.setLanes(newLanes);
         laneCarService.assignLanesToCars(lanesCars);
 
         game.setCircuit(circuit);
@@ -93,34 +113,50 @@ public class GameService {
 
                     car.advance(); //el algoritmo para que avance está en la clase carro
 
-                    if (car.getRouteMts() >= circuit.getKilometers() * 1000
-                            && podium.getFirst() == null) {
-
-                        podium.setFirst(car.getDriver());
-                        car.setWinner(true);
-                        break;
-
-                    }
-                    if (car.getRouteMts() >= circuit.getKilometers() * 1000
-                            && podium.getSecond() == null) {
-
-                        podium.setSecond(car.getDriver());
-                        car.setWinner(true);
-                        break;
-                    }
-                    if (car.getRouteMts() >= circuit.getKilometers() * 1000
-                            && podium.getThird() == null) {
-
-                        podium.setThird(car.getDriver());
-                        car.setWinner(true);
-                        break;
-                    }
+                    if (firstPlace(podium, circuit, car)) break;
+                    if (secondPlace(podium, circuit, car)) break;
+                    if (thirdPlace(podium, circuit, car)) break;
                 }
 
             }
         }
 
+        podium.setGame(game);
         return podiumService.savePodium(podium);
 
+    }
+
+    private boolean thirdPlace(Podium podium, Circuit circuit, Car car) {
+        if (car.getRouteMts() >= circuit.getKilometers() * 1000
+                && podium.getThird() == null) {
+
+            podium.setThird(car.getDriver());
+            car.setWinner(true);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean secondPlace(Podium podium, Circuit circuit, Car car) {
+        if (car.getRouteMts() >= circuit.getKilometers() * 1000
+                && podium.getSecond() == null) {
+
+            podium.setSecond(car.getDriver());
+            car.setWinner(true);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean firstPlace(Podium podium, Circuit circuit, Car car) {
+        if (car.getRouteMts() >= circuit.getKilometers() * 1000
+                && podium.getFirst() == null) {
+
+            podium.setFirst(car.getDriver());
+            car.setWinner(true);
+            return true;
+
+        }
+        return false;
     }
 }

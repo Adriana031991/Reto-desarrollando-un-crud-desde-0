@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import { listCircuits } from './circuit';
+import { circuit } from './circuit';
 import { addPlayer } from './player';
+import { game } from './game';
 
 const rootReducer = combineReducers({
-    circuit : listCircuits,
-    player : addPlayer
+    circuit : circuit,
+    player : addPlayer,
+    game : game
 });
 
 export default rootReducer;

@@ -31,7 +31,7 @@ public class ServiceCircuit {
 
     public ResponseDto get(int id) {
         return new ResponseDto(repositoryCircuit.findById(id).orElseThrow(() -> {
-            throw new RuntimeException("El carro a consultar no existe");
+            throw new RuntimeException("El circuito a consultar no existe");
         }));
     }
 }

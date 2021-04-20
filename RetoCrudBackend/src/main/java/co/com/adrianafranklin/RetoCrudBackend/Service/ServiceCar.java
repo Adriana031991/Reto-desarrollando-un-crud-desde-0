@@ -28,9 +28,9 @@ public class ServiceCar {
     public ResponseDto saveCar(CarDto carDto) {
 
         Car car = new Car();
-        car.setId(carDto.getIdDto());
-        car.setNameCar(carDto.getNameDto());
-        car.setDriver(carDto.getDriverDto());
+        car.setId(carDto.getId());
+        car.setNameCar(carDto.getName());
+        car.setDriver(carDto.getDriver());
         repositoryCar.save(car);
         return new ResponseDto(car, "Se ha creado el jugador correctamente");
 
@@ -39,8 +39,8 @@ public class ServiceCar {
     public ResponseDto assignDriver(Player player){
 
        CarDto carDto = new CarDto();
-       carDto.setNameDto("carro #:"+player.getId());
-       carDto.setDriverDto(player);
+       carDto.setName("carro #:"+player.getId());
+       carDto.setDriver(player);
 
        return this.saveCar(carDto);
 

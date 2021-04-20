@@ -1,14 +1,18 @@
-import { LIST_CIRCUITS } from "../actions/circuit-actions";
+import { LIST_CIRCUITS, SELECT_CIRCUIT, RESET } from "../actions/circuit-actions";
 
 const initialState = {
-    circuits: []
+    circuits: [],
+    circuitSelected: null
 }
-export function listCircuits(state = initialState, action){
+export function circuit(state = initialState, action) {
 
-    switch(action.type){
+    switch (action.type) {
         case LIST_CIRCUITS:
-            console.log("action", action)
-            return Object.assign({}, state, {circuits: action.payload})
+            return Object.assign({}, state, { circuits: action.payload })
+        case SELECT_CIRCUIT:
+            return Object.assign({}, state, { circuitSelected: action.payload })
+            case RESET:
+            return Object.assign({}, state, { circuits:[], circuitSelected:null})
         default:
             return state
     }

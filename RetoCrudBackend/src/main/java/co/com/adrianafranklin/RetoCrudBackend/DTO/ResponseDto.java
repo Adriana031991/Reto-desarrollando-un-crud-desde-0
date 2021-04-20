@@ -1,6 +1,5 @@
 package co.com.adrianafranklin.RetoCrudBackend.DTO;
 
-//@JsonInclude(JsonInclude.Include.NON_NULL) //cuando reotrne los valores, si hay uno null que no lo muestre
 
 /*
 responde los datos
