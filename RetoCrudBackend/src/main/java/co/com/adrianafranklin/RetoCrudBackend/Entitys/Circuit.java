@@ -12,7 +12,7 @@ public class Circuit {
 
     private String name;
 
-    @OneToMany()
+    @OneToMany(cascade=CascadeType.ALL)
     @OrderBy(value = "id")
     @JoinColumn(name = "circuit_id")
     private Set<Lane> lanes;

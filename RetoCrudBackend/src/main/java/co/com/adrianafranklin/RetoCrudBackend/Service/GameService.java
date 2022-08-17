@@ -1,9 +1,7 @@
 
 package co.com.adrianafranklin.RetoCrudBackend.Service;
 
-import co.com.adrianafranklin.RetoCrudBackend.DTO.CarDto;
-import co.com.adrianafranklin.RetoCrudBackend.DTO.CircuitCarDto;
-import co.com.adrianafranklin.RetoCrudBackend.DTO.ResponseDto;
+import co.com.adrianafranklin.RetoCrudBackend.DTO.*;
 import co.com.adrianafranklin.RetoCrudBackend.Entitys.*;
 import co.com.adrianafranklin.RetoCrudBackend.Repository.GameRepository;
 import co.com.adrianafranklin.RetoCrudBackend.exception.ValidationException;
@@ -40,10 +38,10 @@ public class GameService {
         if(circuitCarDto.getCars().size()<3){
             throw new ValidationException("Deben haber mínimo 3 conductores para jugar");
         }
+
         if(circuitCarDto.getCars().size()>circuit.getLanes().size()){
             throw new ValidationException("Deben haber mínimo 3 conductores o "+circuit.getLanes().size());
         }
-
 
         game.setCircuit(circuit);
 
@@ -159,4 +157,19 @@ public class GameService {
         }
         return false;
     }
+
+//    public ResponseDto createGame(GameDto gameDto) {
+//
+//        if(gameDto.getName()== null  )
+//            throw new ValidationException("El nombre del juego no puede ser vacío");
+//
+//        Game game = new Game();
+//        game.setName(gameDto.getName());
+//        game.setId(gameDto.getId());
+//        game = gameRepository.save(game);
+//        return new ResponseDto(game);
+//
+//
+//    }
+
 }

@@ -3,12 +3,13 @@ package co.com.adrianafranklin.RetoCrudBackend.controller;
 import co.com.adrianafranklin.RetoCrudBackend.DTO.PlayerDto;
 import co.com.adrianafranklin.RetoCrudBackend.DTO.ResponseDto;
 import co.com.adrianafranklin.RetoCrudBackend.Service.ServicePlayer;
+import co.com.adrianafranklin.RetoCrudBackend.exception.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin( "http://localhost:3000" )
+@CrossOrigin( "http://localhost:4200" )
 @RequestMapping("api/player")
 public class ControllerPlayer {
 
@@ -28,7 +29,7 @@ public class ControllerPlayer {
 
     @PutMapping
     public ResponseDto updatePlayer(@RequestBody PlayerDto playerDto) {
-        return servicePlayer.savePlayer(playerDto);
+        return servicePlayer.updatePlayer(playerDto);
     }
 
 

@@ -11,15 +11,18 @@ import Circuit from '../Components/circuit';
 
 class Player extends Component {
 
+
     componentWillMount() {
         this.props.listCircuits();
     }
 
     renderCiruits() {
-        console.log(this.props);
+        console.log('renderCircuits',this.props);
         return this.props.circuits.map((circuit) => {
             return (
-                <Circuit key={circuit.id} circuit={circuit} selectCircuit={this.selectCircuit}
+                <Circuit key={circuit.id} 
+                circuit={circuit} 
+                selectCircuit={this.selectCircuit}
                     click={true} />
             )
         })
@@ -66,11 +69,13 @@ class Player extends Component {
     }
 
     setTotalPlayers = (e) => {
-        e.target.reset();
+        // e.target.reset();
         e.preventDefault();
         var totalTanes = this.props.circuitSelected.lanes.length;
 
         var totalPlayers = this.getNumPlayer.value;
+
+        console.log("totalTanes ", totalTanes, 'totalplayers',totalPlayers);
 
         if (totalPlayers <= 1 || totalTanes < totalPlayers) {
             window.alert("El total de jugadores debe ser mínimo 3 y menor a " + totalTanes);
@@ -78,7 +83,7 @@ class Player extends Component {
         }
 
         this.props.setTotalPlayers(totalPlayers);
-        console.log("props", this.props);
+        console.log("props setTotalPlayers", this.props);
     }
 
     startGame() {
@@ -87,6 +92,7 @@ class Player extends Component {
             circuit: this.props.circuitSelected,
             cars: this.props.cars
         }
+        console.log('circuitCarsDto',circuitCarsDto);
 
         this.props.startGame(circuitCarsDto);
     }
@@ -162,6 +168,7 @@ class Player extends Component {
                     </form>
 
                     {this.props.totalPlayers != this.props.cars.length ? <form className="player__name" onSubmit={this.addNewPlayer}>
+                        
                         <br></br>
                         <label>Nombre Jugador  #{this.props.cars.length + 1}</label><br></br>
                         <input

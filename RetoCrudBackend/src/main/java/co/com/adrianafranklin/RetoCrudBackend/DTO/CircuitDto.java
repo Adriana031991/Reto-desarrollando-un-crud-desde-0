@@ -4,12 +4,13 @@ import co.com.adrianafranklin.RetoCrudBackend.Entitys.Lane;
 import co.com.adrianafranklin.RetoCrudBackend.Entitys.Player;
 
 import java.util.List;
+import java.util.Set;
 
 public class CircuitDto {
 
     private int id;
     private String name;
-    private List<Lane> lanes;
+    private Set<Lane> lanes;
     private int kilometers;
 
     public CircuitDto() {
@@ -31,11 +32,11 @@ public class CircuitDto {
         this.name = name;
     }
 
-    public List<Lane> getLanes() {
+    public Set<Lane> getLanes() {
         return lanes;
     }
 
-    public void setLanes(List<Lane> lanes) {
+    public void setLanes(Set<Lane> lanes) {
         this.lanes = lanes;
     }
 

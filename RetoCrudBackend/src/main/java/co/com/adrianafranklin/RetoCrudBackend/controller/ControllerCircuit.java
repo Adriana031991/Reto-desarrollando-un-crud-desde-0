@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin( "http://localhost:3000" )
+@CrossOrigin( "http://localhost:4200" )
 @RequestMapping("api/circuit")
 public class ControllerCircuit {
 
@@ -28,8 +28,14 @@ public class ControllerCircuit {
 
     @PutMapping
     public ResponseDto updateCircuit(@RequestBody CircuitDto circuitDto) {
-        return serviceCircuit.saveCircuit(circuitDto);
+        return serviceCircuit.updateCircuit(circuitDto);
     }
+
+    @DeleteMapping(value = "{id}")
+    public ResponseDto delete(@PathVariable("id") int id) {
+        return serviceCircuit.deleteById(id);
+    }
+
 
     @GetMapping(value = "{id}")
     public ResponseDto get(@PathVariable("id") int id) {

@@ -14,7 +14,10 @@ class Inicio extends Component {
             
                 <img src={imgCoche} height="300px" alt="Coche" />
             <br></br>
-                <Link className="Link" to="/Player"><button>Nueva Partida</button></Link>
+            
+                <Link className="Link" to="/Player">
+                    <button>Nueva Partida</button>
+                </Link>
             </div>
         </React.Fragment>
         );

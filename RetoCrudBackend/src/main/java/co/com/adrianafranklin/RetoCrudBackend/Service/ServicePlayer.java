@@ -21,7 +21,7 @@ public class ServicePlayer {
 
     public ResponseDto savePlayer(PlayerDto playerDto) {
 
-        if(playerDto.getNameDto()== null ||playerDto.getNameDto().isBlank() )
+        if(playerDto.getNameDto()== null  )
             throw new ValidationException("El nombre del jugador no puede ser vacío");
 
         //trae los datos del dto y los guarda en list
@@ -37,7 +37,7 @@ public class ServicePlayer {
     }
 
     public ResponseDto updatePlayer(PlayerDto playerDto){
-        if (playerDto.getNameDto()==null || playerDto.getNameDto().isBlank())
+        if (playerDto.getNameDto()==null )
             throw new ValidationException("Debe especificar el numero del jugador a actualizar");
 
         Player player = new Player();
